@@ -39,8 +39,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define AUTO_MOUSE_DEFAULT_LAYER 1
 
 #define TAPPING_TERM 180
-#define QUICK_TAP_TERM 0
 #define PERMISSIVE_HOLD
+#define QUICK_TAP_TERM 0
+#define QUICK_TAP_TERM_PER_KEY
 #define AUTO_MOUSE_TIME 450  /* マウスが止まってから元のレイヤーに戻るまでの時間(ms) */
 // for CAPS WORD
 #define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
@@ -62,3 +63,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #undef KEYBALL_SCROLL_DIV_DEFAULT
 #define KEYBALL_SCROLL_DIV_DEFAULT 5 // スクロール速度 (default: 4)
+
+#define ACHORDION_STREAK

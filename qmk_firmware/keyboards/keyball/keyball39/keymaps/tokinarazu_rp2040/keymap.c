@@ -22,6 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "lib/keyball/keyball.h"
 #include "features/translate_ansi_to_jis.h"
 #include "features/select_word.h"
+#include "features/achordion.h"
 
 enum custom_keycodes {
   MY_MACRO_0 = SAFE_RANGE,  // 0x7E40  User0
@@ -123,16 +124,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [4] = LAYOUT_universal(
-    RGB_TOG  , AML_TO   , AML_I50  , AML_D50  , _______  ,                                       _______  , _______  , SSNP_HOR , SSNP_VRT , SSNP_FRE ,
-    RGB_MOD  , RGB_HUI  , RGB_SAI  , RGB_VAI  , SCRL_DVI ,                                       _______  , _______  , _______  , _______  , _______  ,
-    RGB_RMOD , RGB_HUD  , RGB_SAD  , RGB_VAD  , SCRL_DVD ,                                       CPI_D1K  , CPI_D100 , CPI_I100 , CPI_I1K  , KBC_SAVE ,
-    QK_BOOT  , KBC_RST  , _______  , _______  , _______  , _______  ,                            _______  , _______  , _______  , _______  , KBC_RST  , QK_BOOT
+    RGB_TOG  , AML_TO   , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                                       XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,
+    RGB_MOD  , RGB_HUI  , RGB_SAI  , RGB_VAI  , SCRL_DVI ,                                       XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,
+    RGB_RMOD , RGB_HUD  , RGB_SAD  , RGB_VAD  , SCRL_DVD ,                                       XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , KBC_SAVE ,
+    QK_BOOT  , KBC_RST  , XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  ,                            XXXXXXX  , XXXXXXX  , XXXXXXX  , XXXXXXX  , KBC_RST  , QK_BOOT
   ),
 };
 // clang-format on
 
 // clang-format off
 /*
+  [4] = LAYOUT_universal(
+    RGB_TOG  , AML_TO   , AML_I50  , AML_D50  , _______  ,                                       _______  , _______  , SSNP_HOR , SSNP_VRT , SSNP_FRE ,
+    RGB_MOD  , RGB_HUI  , RGB_SAI  , RGB_VAI  , SCRL_DVI ,                                       _______  , _______  , _______  , _______  , _______  ,
+    RGB_RMOD , RGB_HUD  , RGB_SAD  , RGB_VAD  , SCRL_DVD ,                                       CPI_D1K  , CPI_D100 , CPI_I100 , CPI_I1K  , KBC_SAVE ,
+    QK_BOOT  , KBC_RST  , _______  , _______  , _______  , _______  ,                            _______  , _______  , _______  , _______  , KBC_RST  , QK_BOOT
+  ),
+
 color.h
 
 #define HSV_AZURE       132, 102, 255
@@ -587,10 +595,16 @@ bool caps_word_press_user(uint16_t keycode) {
   }
 }
 
+void housekeeping_task_user(void) {
+  achordion_task();
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 //  if (!process_smtd(keycode, record)) {
 //    return false;
 //  }
+
+  if (!process_achordion(keycode, record)) { return false; }
 
   if (record->event.pressed) {
     static uint32_t last_key_pressed = 0;
