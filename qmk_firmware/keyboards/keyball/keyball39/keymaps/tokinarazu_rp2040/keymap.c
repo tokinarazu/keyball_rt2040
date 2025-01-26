@@ -22,7 +22,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "lib/keyball/keyball.h"
 #include "features/translate_ansi_to_jis.h"
 #include "features/select_word.h"
-#include "features/achordion.h"
 
 enum custom_keycodes {
   MY_MACRO_0 = SAFE_RANGE,  // 0x7E40  User0
@@ -110,7 +109,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [2] = LAYOUT_universal(
-    KC_F6   , KC_F7     , KC_F8   , KC_F9     , KC_F10   ,                                        XXXXXXX    , KC_7       , KC_8     , KC_9     , KC_0    ,
+    KC_F6   , KC_F7     , KC_F8   , KC_F9     , KC_F10   ,                                        KC_COMM    , KC_7       , KC_8     , KC_9     , KC_0    ,
     KC_PSCR , KC_F2     , KC_F3   , KC_F4     , KC_F5    ,                                        KC_DOT     , KC_4       , KC_5     , KC_6     , KC_MINS ,
     DM_REC1 , DM_RSTP   , DM_PLY1 , KC_F11    , KC_F12   ,                                        S(KC_SCLN) , KC_1       , KC_2     , KC_3     , KC_SLSH ,
     _______ , _______   , _______ , _______   , _______  , _______  ,                             QK_AREP    , _______    , _______  , _______  , _______ , KC_F1
@@ -595,16 +594,10 @@ bool caps_word_press_user(uint16_t keycode) {
   }
 }
 
-void housekeeping_task_user(void) {
-  achordion_task();
-}
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 //  if (!process_smtd(keycode, record)) {
 //    return false;
 //  }
-
-  if (!process_achordion(keycode, record)) { return false; }
 
   if (record->event.pressed) {
     static uint32_t last_key_pressed = 0;

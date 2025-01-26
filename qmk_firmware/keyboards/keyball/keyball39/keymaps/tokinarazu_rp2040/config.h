@@ -63,5 +63,3 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #undef KEYBALL_SCROLL_DIV_DEFAULT
 #define KEYBALL_SCROLL_DIV_DEFAULT 5 // スクロール速度 (default: 4)
-
-#define ACHORDION_STREAK
