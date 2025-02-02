@@ -289,10 +289,6 @@ static int16_t movement_size_of(report_mouse_t *rep) {
     return abs(rep->x) + abs(rep->y);
 }
 
-static int16_t movement_size_of(report_mouse_t *rep) {
-    return abs(rep->x) + abs(rep->y);
-}
-
 static void extend_auto_mouse_timeout_by_motion(report_mouse_t *rep) {
     int16_t movement_size = movement_size_of(rep);
     // extend auto mouse timeout if mouse is moving,
