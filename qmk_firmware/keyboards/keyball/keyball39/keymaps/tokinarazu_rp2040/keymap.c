@@ -22,6 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "lib/keyball/keyball.h"
 #include "features/translate_ansi_to_jis.h"
 #include "features/select_word.h"
+#include "features/achordion.h"
 
 enum custom_keycodes {
   MY_MACRO_0 = SAFE_RANGE,  // 0x7E40  User0
@@ -597,10 +598,16 @@ bool caps_word_press_user(uint16_t keycode) {
   }
 }
 
+void housekeeping_task_user(void) {
+  achordion_task();
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 //  if (!process_smtd(keycode, record)) {
 //    return false;
 //  }
+
+  if (!process_achordion(keycode, record)) { return false; }
 
   if (record->event.pressed) {
     static uint32_t last_key_pressed = 0;

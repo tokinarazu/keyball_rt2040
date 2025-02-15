@@ -39,7 +39,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define AUTO_MOUSE_DEFAULT_LAYER 1
 #define AUTO_MOUSE_LAYER_KEEP_TIME 30000
 
-#define TAPPING_TERM 180
+#define TAPPING_TERM 165
 #define PERMISSIVE_HOLD
 #define QUICK_TAP_TERM 0
 #define QUICK_TAP_TERM_PER_KEY
@@ -64,3 +64,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #undef KEYBALL_SCROLL_DIV_DEFAULT
 #define KEYBALL_SCROLL_DIV_DEFAULT 5 // スクロール速度 (default: 4)
+
+// for achordion feature  @see https://getreuer.info/posts/keyboards/achordion/index.html
+#define ACHORDION_STREAK
